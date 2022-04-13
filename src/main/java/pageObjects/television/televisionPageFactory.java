@@ -18,11 +18,17 @@ public class televisionPageFactory {
     @FindBy(css = ".hmenu")
     WebElement mainMenuList;
     @FindBy(css = ".a-list-item > a")
-    WebElement televisionFilterList;
+    WebElement televisionFilterMenuList;
     @FindBy(css = ".a-section h2 > a > span.a-text-normal")
-    WebElement nameCards;
+    WebElement itemNameCards;
+    @FindBy(css = "h2 > a")
+    WebElement items;
     @FindBy(css = "#s-result-sort-select")
     WebElement filterBtn;
+    @FindBy(css = "#feature-bullets > h1")
+    WebElement aboutItemTitle;
+    @FindBy(css = "#feature-bullets > ul > li > span")
+    WebElement aboutItemList;
 
 
 
@@ -69,7 +75,6 @@ public class televisionPageFactory {
         }
     }
 
-
     public String getSearchFieldTypeAttribute () {
         return searchField.getAttribute("type");
     }
@@ -83,6 +88,80 @@ public class televisionPageFactory {
             return false;
         }
     }
+
+    //Check that the menu list is displayed after the menu button is clicked.
+    public boolean isMainMenuListDisplayed () {
+        try {
+            return mainMenuList.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The side menu list is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+    //Check that the television list is displayed
+    public boolean isTelevisionListDisplayed () {
+        try {
+            return televisionFilterMenuList.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The side menu list for televison is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+    //Check that the filter button is displayed
+    public boolean isFilterButtonDisplayed () {
+        try {
+            return filterBtn.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The filter button is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+    //Check that the name cards of items are displayed to help us confirm each name contains Samsung
+    public boolean isSamsungItemNameCardDisplayed () {
+        try {
+            return itemNameCards.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The name cards of each item is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+    //Check that the list of items are displayed to help us click on the second highest
+    public boolean isSamsungItemsDisplayed () {
+        try {
+            return items.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The list containing each item is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+    //Check that about item title is displayed
+    public boolean isAboutItemTitleDisplayed () {
+        try {
+            return aboutItemTitle.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The about item header is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+    //Check that the list of bullet points under about item is displayed
+    public boolean isAboutItemDescriptionListDisplayed () {
+        try {
+            return aboutItemList.isDisplayed();
+        } catch(Exception e) {
+            System.out.print("The list containing about item description is not displayed \n" + e.getMessage());
+            return false;
+        }
+    }
+
+
+
+
 
 
 
