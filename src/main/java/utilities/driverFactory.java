@@ -25,14 +25,14 @@ public class driverFactory {
             System.out.println("Current OS => " + System.getProperty("os.name"));
 
             if(System.getProperty("os.name").contains("Linux")) {
-                System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedriverlinux");
+                System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedriverLinux2");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
                 return new ChromeDriver(options);
             }
 
             if(System.getProperty("os.name").contains("Mac"))
-                System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedrivermac");
+                System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedriverMac2");
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
             //options.addArguments("--headless");
