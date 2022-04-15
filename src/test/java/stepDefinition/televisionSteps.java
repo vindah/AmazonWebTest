@@ -1,5 +1,6 @@
 package stepDefinition;
 
+import com.applitools.eyes.selenium.Eyes;
 import dataProvider.configFileReader;
 import io.cucumber.java.Before;
 import io.cucumber.java.After;
@@ -20,9 +21,13 @@ import java.util.concurrent.TimeUnit;
 public class televisionSteps {
 
     WebDriver driver;
+    Eyes eyes;
     televisionPageFactory televisionPage;
     configFileReader ConfigFileReader;
 
+
+    //I will be using applitools eyes for visual tests, to run this for yourself you need to create
+    //... an applitools account, get an applitools api key, add the applitools dependencies and then pass the key to test.
 
     // This runs before each test
     @Before()
@@ -30,6 +35,9 @@ public class televisionSteps {
         driver = utilities.driverFactory.open("chrome");
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
         ConfigFileReader = new configFileReader();
+        eyes = new Eyes();
+        eyes.setApiKey(ConfigFileReader.getApplitoolsKey());
+        eyes.open(driver, "Amazon", "Smoke Test");
     }
 
 
@@ -38,10 +46,12 @@ public class televisionSteps {
     //Smoke test - verify that the home page loads properly
     @Given("The merchant is on the home page")
     public void merchant_home_page() {
-        System.out.println("Opening URL: " + ConfigFileReader.getApplicationUrl());    //+ "signin"
+        System.out.println("Opening URL: " + ConfigFileReader.getApplicationUrl());
         driver.get(ConfigFileReader.getApplicationUrl()) ;
         driver.manage().timeouts().implicitlyWait(ConfigFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+        eyes.checkWindow("Check Home page");
         televisionPage = new televisionPageFactory(driver);
+        eyes.close();
     }
     @Then("The Logo should be displayed")
     public void verify_page_logo () {
@@ -109,15 +119,19 @@ public class televisionSteps {
 
 
 
-
     @After()
     public void takeScreenshots(Scenario scenario) {
+//        //Close Applitools eyes
+//        eyes.close();
+//        //To force close/abort if it does not close
+//        eyes.abortIfNotClosed();
         if (scenario.isFailed()) {
             // take screenshot:
             String screenshotName = scenario.getName().replaceAll(" ", "_");
             byte[] sourcePath = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(sourcePath, "image/png", screenshotName);
         }
+        eyes.close();
         driver.quit();
     }
 }

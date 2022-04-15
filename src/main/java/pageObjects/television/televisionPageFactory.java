@@ -162,6 +162,7 @@ public class televisionPageFactory {
     //Check that about item title is displayed
     public boolean isAboutItemTitleDisplayed() {
         try {
+            System.out.println("Just logging the about...");
             System.out.println(aboutItemTitle.getText());
             return aboutItemTitle.isDisplayed();
         } catch (Exception e) {

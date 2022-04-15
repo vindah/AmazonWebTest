@@ -53,5 +53,11 @@ public class configFileReader {
         else throw new RuntimeException("url not specified in the configuration.properties file.");
     }
 
+    public String getApplitoolsKey() {
+        String applitoolsApiKey = properties.getProperty("APPLITOOLS_API_KEY");
+        if(applitoolsApiKey != null) return applitoolsApiKey;
+        else throw new RuntimeException("Key not specified in the configuration.properties file.");
+    }
+
 
 }
