@@ -178,11 +178,12 @@ public class televisionPageFactory {
             for (WebElement i : aboutItemList) {
                 if (i.isDisplayed()) {
                     listDescription = true;
-                    System.out.println("-"+i.getText());
+
                 }else{
                     listDescription = false; //return false if list is not displayed
                     break;
                 }
+                System.out.println("-"+i.getText());
             }
             return listDescription;
         } catch (Exception e) {
@@ -251,7 +252,7 @@ public class televisionPageFactory {
         int highest = Integer.parseInt(priceList.get(0).getText().replaceAll(",", ""));
         int lowest = Integer.parseInt(priceList.get(priceList.size()-1).getText().replaceAll(",",""));
 
-        System.out.println("I am checking this");
+        System.out.println("Comparing prices...");
 
         for(int i=1; i< priceList.size();i++){
             int a = Integer.parseInt(priceList.get(i).getText().replaceAll(",", ""));
