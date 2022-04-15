@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Locale;
@@ -185,13 +186,10 @@ public class televisionPageFactory {
 
     //Below are methods to click on different elements
 
-    //Click on the menu button
-    public televisionPageFactory clickOnAllMenuBtn() {
+    //Click on the main menu button
+    public void clickOnAllMenuBtn() {
         allMenuBtn.click();
-        return new televisionPageFactory(driver);
     }
-
-
 
     //Loop through the main menu list and click on the element that contains the text passed
     //To click on items on the main menu list
@@ -221,6 +219,15 @@ public class televisionPageFactory {
             System.out.print("Samsung is not displayed \n" + e.getMessage());
         }
     }
+
+    //Click on the filter button on the samsung page and filter
+    public void clickOnSamsungPriceFilter() {
+        Select filter = new Select(filterBtn);
+        filter.selectByValue("price-desc-rank");
+    }
+
+    //Click on the
+
 
 
 

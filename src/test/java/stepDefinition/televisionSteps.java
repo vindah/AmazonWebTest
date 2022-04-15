@@ -84,6 +84,12 @@ public class televisionSteps {
         Assert.assertTrue(televisionPage.isSamsungFilterCorrect());
     }
 
+    @When("The user filters by high to low")
+    public void filter_by_highToLow(){
+        Assert.assertTrue(televisionPage.isFilterButtonDisplayed());
+        televisionPage.clickOnSamsungPriceFilter();
+    }
+
 
 
 
