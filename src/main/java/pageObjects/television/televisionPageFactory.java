@@ -252,7 +252,7 @@ public class televisionPageFactory {
 
         System.out.println("I am checking this");
 
-        for(int i=1; i< priceList.size()-1;i++){
+        for(int i=1; i< priceList.size();i++){
             int a = Integer.parseInt(priceList.get(i).getText().replaceAll(",", ""));
             if(highest>=a && lowest<=a){
                 checkPrice = true;

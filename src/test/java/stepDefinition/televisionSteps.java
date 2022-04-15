@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -33,6 +34,7 @@ public class televisionSteps {
 
 
 
+    @Test
     //Smoke test - verify that the home page loads properly
     @Given("The merchant is on the home page")
     public void merchant_home_page() {
@@ -69,7 +71,8 @@ public class televisionSteps {
     }
 
     @And("The user clicks on Televisions")
-    public void click_on_televisions(){
+    public void click_on_televisions() throws InterruptedException {
+        Thread.sleep(2000);
         televisionPage.clickOnMenuItem("Televisions");
         Assert.assertTrue(televisionPage.isTelevisionListDisplayed());
     }
@@ -95,7 +98,7 @@ public class televisionSteps {
     @And("The user clicks on the second highest item")
     public void click_on_secondHighest_item() throws InterruptedException {
         televisionPage.clickOnSecondHighestItem();
-        Thread.sleep(4000);
+        Thread.sleep(3000);
     }
 
     @Then("The user should be able to log the about of the item successfully to the console")

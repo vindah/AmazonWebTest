@@ -95,9 +95,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
-                    <!--                <parallel>classes</parallel>-->
-                    <!--                <threadCount>5</threadCount>-->
-                    <parallel>methods</parallel>
+                    <parallel>all</parallel>
+                    <threadCount>10</threadCount>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                     <testFailureIgnore>true</testFailureIgnore>
                     <systemPropertyVariables>
