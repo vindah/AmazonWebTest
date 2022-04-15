@@ -20,7 +20,7 @@ public class televisionPageFactory {
     WebElement navLogo;
     @FindBy(className = "hmenu-item")
     List<WebElement> mainMenuList;
-    @FindBy(css = ".a-list-item > a")
+    @FindBy(xpath = "//*[@class='a-list-item']/a")
     List<WebElement> televisionFilterMenuList;
     @FindBy(css = ".a-section h2 > a > span.a-text-normal")
     List<WebElement> samsungNameCards;
