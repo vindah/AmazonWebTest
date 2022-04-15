@@ -219,16 +219,17 @@ public class televisionPageFactory {
         filter.selectByValue("price-desc-rank");
     }
 
-    //Check that the list of items are displayed to help us click on the second highest
-    public void isSamsungItemsDisplayed() {
+    //Check that the list of items are displayed to help us click on the second highest item.
+    public televisionPageFactory clickOnSecondHighestItem() {
         try {
             items.get(1).click();
         } catch (Exception e) {
-            System.out.print("The Samsung item list is not displayed \n" + e.getMessage());
+            System.out.print("The second item is not enabled \n" + e.getMessage());
         }
+        return new televisionPageFactory(driver);
     }
 
-    //Click on the Second highest item
+    //Check and compare the item prices
     public boolean checkItemPrices(){
         //First check that the filter works properly
         boolean checkPrice = false;

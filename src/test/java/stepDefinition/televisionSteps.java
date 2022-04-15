@@ -91,6 +91,12 @@ public class televisionSteps {
         Assert.assertTrue(televisionPage.checkItemPrices());
     }
 
+    @And("The user clicks on the second highest item")
+    public void click_on_secondHighest_item(){
+        televisionPage.clickOnSecondHighestItem();
+
+    }
+
 
 
 
