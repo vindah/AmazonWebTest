@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
 public class televisionSteps {
 
     WebDriver driver;
-    Eyes eyes;
+    //Eyes eyes;
     televisionPageFactory televisionPage;
     configFileReader ConfigFileReader;
 
 
-    //I will be using applitools eyes for visual tests, to run this for yourself you need to create
+    //You can un-comment and use applitools eyes for visual tests. To run this for yourself you need to create
     //... an applitools account, get an applitools api key, add the applitools dependencies and then pass the key to test.
 
     // This runs before each test
@@ -35,9 +35,9 @@ public class televisionSteps {
         driver = utilities.driverFactory.open("chrome");
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
         ConfigFileReader = new configFileReader();
-        eyes = new Eyes();
-        eyes.setApiKey(ConfigFileReader.getApplitoolsKey());
-        eyes.open(driver, "Amazon", "Smoke Test");
+        //eyes = new Eyes();
+        //eyes.setApiKey(ConfigFileReader.getApplitoolsKey());
+        //eyes.open(driver, "Amazon", "Smoke Test");
     }
 
 
@@ -49,9 +49,9 @@ public class televisionSteps {
         System.out.println("Opening URL: " + ConfigFileReader.getApplicationUrl());
         driver.get(ConfigFileReader.getApplicationUrl()) ;
         driver.manage().timeouts().implicitlyWait(ConfigFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
-        eyes.checkWindow("Check Home page");
+        //eyes.checkWindow("Check Home page");
         televisionPage = new televisionPageFactory(driver);
-        eyes.close();
+        //eyes.close();
     }
     @Then("The Logo should be displayed")
     public void verify_page_logo () {
@@ -121,17 +121,13 @@ public class televisionSteps {
 
     @After()
     public void takeScreenshots(Scenario scenario) {
-//        //Close Applitools eyes
-//        eyes.close();
-//        //To force close/abort if it does not close
-//        eyes.abortIfNotClosed();
         if (scenario.isFailed()) {
             // take screenshot:
             String screenshotName = scenario.getName().replaceAll(" ", "_");
             byte[] sourcePath = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(sourcePath, "image/png", screenshotName);
         }
-        eyes.close();
+        //eyes.abortIfNotClosed();
         driver.quit();
     }
 }
