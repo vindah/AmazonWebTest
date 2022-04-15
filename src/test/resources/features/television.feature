@@ -27,4 +27,4 @@ Feature: Amazon feature
     Then The Samsung page should be displayed successfully
     When The user filters by high to low
     And The user clicks on the second highest item
-#    Then The user should be able to log the about of the item successfully.
+    Then The user should be able to log the about of the item successfully to the console

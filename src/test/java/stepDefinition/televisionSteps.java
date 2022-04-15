@@ -85,20 +85,24 @@ public class televisionSteps {
     }
 
     @When("The user filters by high to low")
-    public void filter_by_highToLow(){
+    public void filter_by_highToLow() throws InterruptedException {
         Assert.assertTrue(televisionPage.isFilterButtonDisplayed());
         televisionPage.clickOnSamsungPriceFilter();
+        Thread.sleep(4000);
         Assert.assertTrue(televisionPage.checkItemPrices());
     }
 
     @And("The user clicks on the second highest item")
-    public void click_on_secondHighest_item(){
+    public void click_on_secondHighest_item() throws InterruptedException {
         televisionPage.clickOnSecondHighestItem();
-
+        Thread.sleep(4000);
     }
 
-
-
+    @Then("The user should be able to log the about of the item successfully to the console")
+    public void log_about_of_Samsung_item(){
+        Assert.assertTrue(televisionPage.isAboutItemTitleDisplayed());
+        Assert.assertTrue(televisionPage.isAboutItemDescriptionListDisplayed());
+    }
 
 
 

@@ -1,6 +1,7 @@
 package pageObjects.television;
 
 import com.aventstack.extentreports.util.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ import java.util.Locale;
 
 public class televisionPageFactory {
     WebDriver driver;
+
 
     //Getting all the elements/selectors on the pages
     @FindBy(css = "#nav-hamburger-menu")
@@ -35,7 +37,7 @@ public class televisionPageFactory {
     @FindBy(css = "#feature-bullets > h1")
     WebElement aboutItemTitle;
     @FindBy(css = "#feature-bullets > ul > li > span")
-    WebElement aboutItemList;
+    List<WebElement> aboutItemList;
 
 
     public televisionPageFactory(WebDriver driver) {
@@ -160,6 +162,7 @@ public class televisionPageFactory {
     //Check that about item title is displayed
     public boolean isAboutItemTitleDisplayed() {
         try {
+            System.out.println(aboutItemTitle.getText());
             return aboutItemTitle.isDisplayed();
         } catch (Exception e) {
             System.out.print("The about item header is not displayed \n" + e.getMessage());
@@ -169,10 +172,20 @@ public class televisionPageFactory {
 
     //Check that the list of bullet points under about item is displayed
     public boolean isAboutItemDescriptionListDisplayed() {
+        boolean listDescription = false;
         try {
-            return aboutItemList.isDisplayed();
+            for (WebElement i : aboutItemList) {
+                if (i.isDisplayed()) {
+                    listDescription = true;
+                    System.out.println("-"+i.getText());
+                }else{
+                    listDescription = false; //return false if list is not displayed
+                    break;
+                }
+            }
+            return listDescription;
         } catch (Exception e) {
-            System.out.print("The list containing about item description is not displayed \n" + e.getMessage());
+            System.out.print("The list description is not displayed \n" + e.getMessage());
             return false;
         }
     }
@@ -222,6 +235,7 @@ public class televisionPageFactory {
     //Check that the list of items are displayed to help us click on the second highest item.
     public televisionPageFactory clickOnSecondHighestItem() {
         try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].removeAttribute('target')",items.get(1));
             items.get(1).click();
         } catch (Exception e) {
             System.out.print("The second item is not enabled \n" + e.getMessage());
@@ -236,7 +250,9 @@ public class televisionPageFactory {
         int highest = Integer.parseInt(priceList.get(0).getText().replaceAll(",", ""));
         int lowest = Integer.parseInt(priceList.get(priceList.size()-1).getText().replaceAll(",",""));
 
-        for(int i=1; i<4;i++){
+        System.out.println("I am checking this");
+
+        for(int i=1; i< priceList.size()-1;i++){
             int a = Integer.parseInt(priceList.get(i).getText().replaceAll(",", ""));
             if(highest>=a && lowest<=a){
                 checkPrice = true;
