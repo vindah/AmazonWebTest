@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.Locale;
 
 public class televisionPageFactory {
     WebDriver driver;
@@ -13,16 +14,16 @@ public class televisionPageFactory {
     //Getting all the elements/selectors on the pages
     @FindBy(css = "#nav-hamburger-menu")
     WebElement allMenuBtn;
-    @FindBy(css = ".nav-search-field")
+    @FindBy(id = "twotabsearchtextbox")
     WebElement searchField;
     @FindBy(css = "#nav-logo")
     WebElement navLogo;
-    @FindBy(css = ".hmenu")
-    WebElement mainMenuList;
+    @FindBy(className = "hmenu-item")
+    List<WebElement> mainMenuList;
     @FindBy(css = ".a-list-item > a")
     List<WebElement> televisionFilterMenuList;
     @FindBy(css = ".a-section h2 > a > span.a-text-normal")
-    WebElement itemNameCards;
+    WebElement samsungNameCards;
     @FindBy(css = "h2 > a")
     WebElement items;
     @FindBy(css = "#s-result-sort-select")
@@ -91,8 +92,15 @@ public class televisionPageFactory {
 
     //Check that the menu list is displayed after the menu button is clicked.
     public boolean isMainMenuListDisplayed() {
+        boolean mainMenu = false;
         try {
-            return mainMenuList.isDisplayed();
+            for (WebElement i : mainMenuList) {
+                if (i.getText().equalsIgnoreCase("TV, Appliances, Electronics")) {
+                    mainMenu = i.isDisplayed();
+                    break;
+                }
+            }
+            return mainMenu;
         } catch (Exception e) {
             System.out.print("The side menu list is not displayed \n" + e.getMessage());
             return false;
@@ -100,9 +108,19 @@ public class televisionPageFactory {
     }
 
     //Check that the television list is displayed
-    public void isTelevisionListDisplayed() {
-        for (WebElement i : televisionFilterMenuList) {
-            i.isDisplayed();
+    public boolean isTelevisionListDisplayed() {
+        boolean tvMenu = false;
+        try {
+            for (WebElement i : televisionFilterMenuList) {
+                if (i.getText().equalsIgnoreCase("Samsung")) {
+                    tvMenu = i.isDisplayed();
+                    break;
+                }
+            }
+            return tvMenu;
+        } catch (Exception e) {
+            System.out.print("The television list is not displayed \n" + e.getMessage());
+            return false;
         }
     }
 
@@ -119,7 +137,7 @@ public class televisionPageFactory {
     //Check that the name cards of items are displayed to help us confirm each name contains Samsung
     public boolean isSamsungItemNameCardDisplayed() {
         try {
-            return itemNameCards.isDisplayed();
+            return samsungNameCards.isDisplayed();
         } catch (Exception e) {
             System.out.print("The name cards of each item is not displayed \n" + e.getMessage());
             return false;
@@ -157,22 +175,44 @@ public class televisionPageFactory {
     }
 
     //Below are methods to click on different elements
+
+    //Click on the menu button
     public televisionPageFactory clickOnAllMenuBtn() {
         allMenuBtn.click();
         return new televisionPageFactory(driver);
     }
 
-    //Loop through the list and click on the element that contains the text
-//    public televisionPageFactory clickOnTvElectronicsAndAppliances() {
-//        for (WebElement i : televisionFilterMenuList) {
-//            System.out.println(i.getText());
-//            if (televisionFilterMenuList.get(Integer.parseInt(i.getText())).getText().toLowerCase().contains("TV, Appliances, Electronics".toLowerCase())) {
-//                televisionFilterMenuList.get(Integer.parseInt(i.getText())).click();
-//                break;
-//            }
-//            return new televisionPageFactory(driver);
-//        }
-//    }
+
+
+    //Loop through the main menu list and click on the element that contains the text passed
+    //To click on items on the main menu list
+    public void clickOnMenuItem(String tvText) {
+        try {
+            for (WebElement i : mainMenuList) {
+                if (i.getText().equalsIgnoreCase(tvText)) {
+                    i.click();
+                    break;
+                }
+            }
+        }catch (Exception e) {
+            System.out.print("The menu element is not displayed \n" + e.getMessage());
+        }
+    }
+
+    //Check the Televisions list and click on Samsung
+    public void clickOnSamsung(){
+        try {
+            for (WebElement i : televisionFilterMenuList) {
+                if (i.getText().equalsIgnoreCase("Samsung")) {
+                    i.click();
+                    break;
+                }
+            }
+        }catch (Exception e) {
+            System.out.print("Samsung is not displayed \n" + e.getMessage());
+        }
+    }
+
 
 
 }

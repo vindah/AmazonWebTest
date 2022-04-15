@@ -49,7 +49,7 @@ public class televisionSteps {
     public void verify_search_field () {
         Assert.assertTrue(televisionPage.isSearchFieldDisplayed());
         Assert.assertTrue(televisionPage.isSearchFieldEditable());
-        Assert.assertEquals(televisionPage.getSearchFieldTypeAttribute(), "search");
+        Assert.assertEquals(televisionPage.getSearchFieldTypeAttribute(), "text");
     }
     @Then("The side menu button should be present")
     public void verify_side_menu_btn(){
@@ -63,10 +63,26 @@ public class televisionSteps {
         Assert.assertTrue(televisionPage.isMainMenuListDisplayed());
     }
 
-//    @And("The user clicks on the Tv, Electronics and Appliances text")
-//    public void click_on_tvElectronicsAndAppliances(){
-//        Assert.assertEquals(televisionPage.isTelevisionListDisplayed(), televisionPage.isTelevisionListDisplayed());
-//    }
+    @And("The user clicks on Tv, Electronics and Appliances")
+    public void click_on_tvElectronicsAndAppliances(){
+        televisionPage.clickOnMenuItem("TV, Appliances, Electronics");
+    }
+
+    @And("The user clicks on Televisions")
+    public void click_on_televisions(){
+        televisionPage.clickOnMenuItem("Televisions");
+        Assert.assertTrue(televisionPage.isTelevisionListDisplayed());
+    }
+
+    @And("The user clicks on Samsung")
+    public void click_on_samsung(){
+        televisionPage.clickOnSamsung();
+    }
+
+    @Then("The Samsung page should be displayed successfully.")
+    public void verify_samsung_page(){
+
+    }
 
 
 

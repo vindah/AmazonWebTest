@@ -21,10 +21,10 @@ Feature: Amazon feature
     Then The search field should be present and editable
     Then The side menu button should be present
     When The user clicks on the Side menu button
-    And The user clicks on the Tv, Electronics and Appliances text
-    And The user clicks on the Television text
-    And the user clicks on samsung
+    And The user clicks on Tv, Electronics and Appliances
+    And The user clicks on Televisions
+    And The user clicks on Samsung
     Then The Samsung page should be displayed successfully.
-    When The user filters by high to low
-    And The user clicks on the second highest item
-    Then The user should be able to log the about of the item successfully.
+#    When The user filters by high to low
+#    And The user clicks on the second highest item
+#    Then The user should be able to log the about of the item successfully.
