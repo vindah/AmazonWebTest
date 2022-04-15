@@ -79,9 +79,9 @@ public class televisionSteps {
         televisionPage.clickOnSamsung();
     }
 
-    @Then("The Samsung page should be displayed successfully.")
+    @Then("The Samsung page should be displayed successfully")
     public void verify_samsung_page(){
-
+        Assert.assertTrue(televisionPage.isSamsungFilterCorrect());
     }
 
 

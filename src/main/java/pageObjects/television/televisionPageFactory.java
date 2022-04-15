@@ -23,7 +23,7 @@ public class televisionPageFactory {
     @FindBy(css = ".a-list-item > a")
     List<WebElement> televisionFilterMenuList;
     @FindBy(css = ".a-section h2 > a > span.a-text-normal")
-    WebElement samsungNameCards;
+    List<WebElement> samsungNameCards;
     @FindBy(css = "h2 > a")
     WebElement items;
     @FindBy(css = "#s-result-sort-select")
@@ -135,11 +135,20 @@ public class televisionPageFactory {
     }
 
     //Check that the name cards of items are displayed to help us confirm each name contains Samsung
-    public boolean isSamsungItemNameCardDisplayed() {
+    public boolean isSamsungFilterCorrect() {
+        boolean nameCards = false;
         try {
-            return samsungNameCards.isDisplayed();
+            for (WebElement i : samsungNameCards) {
+                if (i.getText().contains("Samsung")) {
+                    nameCards = true;
+                }else{
+                    nameCards = false; //return false if an element does not contain Samsung
+                    break;
+                }
+            }
+            return nameCards;
         } catch (Exception e) {
-            System.out.print("The name cards of each item is not displayed \n" + e.getMessage());
+            System.out.print("The Samsung name cards is not displayed \n" + e.getMessage());
             return false;
         }
     }
@@ -212,6 +221,8 @@ public class televisionPageFactory {
             System.out.print("Samsung is not displayed \n" + e.getMessage());
         }
     }
+
+
 
 
 
