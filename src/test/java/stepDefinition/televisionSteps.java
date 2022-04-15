@@ -88,7 +88,9 @@ public class televisionSteps {
     public void filter_by_highToLow(){
         Assert.assertTrue(televisionPage.isFilterButtonDisplayed());
         televisionPage.clickOnSamsungPriceFilter();
+        Assert.assertTrue(televisionPage.checkItemPrices());
     }
+
 
 
 

@@ -1,5 +1,6 @@
 package pageObjects.television;
 
+import com.aventstack.extentreports.util.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,8 +26,10 @@ public class televisionPageFactory {
     List<WebElement> televisionFilterMenuList;
     @FindBy(css = ".a-section h2 > a > span.a-text-normal")
     List<WebElement> samsungNameCards;
+    @FindBy(css = ".a-price-whole")
+    List<WebElement> priceList;
     @FindBy(css = "h2 > a")
-    WebElement items;
+    List<WebElement> items;
     @FindBy(css = "#s-result-sort-select")
     WebElement filterBtn;
     @FindBy(css = "#feature-bullets > h1")
@@ -154,16 +157,6 @@ public class televisionPageFactory {
         }
     }
 
-    //Check that the list of items are displayed to help us click on the second highest
-    public boolean isSamsungItemsDisplayed() {
-        try {
-            return items.isDisplayed();
-        } catch (Exception e) {
-            System.out.print("The list containing each item is not displayed \n" + e.getMessage());
-            return false;
-        }
-    }
-
     //Check that about item title is displayed
     public boolean isAboutItemTitleDisplayed() {
         try {
@@ -226,7 +219,33 @@ public class televisionPageFactory {
         filter.selectByValue("price-desc-rank");
     }
 
-    //Click on the
+    //Check that the list of items are displayed to help us click on the second highest
+    public void isSamsungItemsDisplayed() {
+        try {
+            items.get(1).click();
+        } catch (Exception e) {
+            System.out.print("The Samsung item list is not displayed \n" + e.getMessage());
+        }
+    }
+
+    //Click on the Second highest item
+    public boolean checkItemPrices(){
+        //First check that the filter works properly
+        boolean checkPrice = false;
+        int highest = Integer.parseInt(priceList.get(0).getText().replaceAll(",", ""));
+        int lowest = Integer.parseInt(priceList.get(priceList.size()-1).getText().replaceAll(",",""));
+
+        for(int i=1; i<4;i++){
+            int a = Integer.parseInt(priceList.get(i).getText().replaceAll(",", ""));
+            if(highest>=a && lowest<=a){
+                checkPrice = true;
+            }else{
+                checkPrice = false;
+                break;
+            }
+        }
+        return checkPrice;
+    }
 
 
 
