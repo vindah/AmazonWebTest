@@ -57,6 +57,7 @@ Navigate to root directory and run:
 
 
 **Run with Visual testing** 
+
 For this project, Applitools eyes was setup
 
 You can un-comment and use applitools eyes for visual tests(this is currently commented out in **step file**). To run this for yourself you need to create 
