@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class televisionPageFactory {
     WebDriver driver;
 
@@ -18,7 +20,7 @@ public class televisionPageFactory {
     @FindBy(css = ".hmenu")
     WebElement mainMenuList;
     @FindBy(css = ".a-list-item > a")
-    WebElement televisionFilterMenuList;
+    List<WebElement> televisionFilterMenuList;
     @FindBy(css = ".a-section h2 > a > span.a-text-normal")
     WebElement itemNameCards;
     @FindBy(css = "h2 > a")
@@ -29,8 +31,6 @@ public class televisionPageFactory {
     WebElement aboutItemTitle;
     @FindBy(css = "#feature-bullets > ul > li > span")
     WebElement aboutItemList;
-
-
 
 
     public televisionPageFactory(WebDriver driver) {
@@ -51,10 +51,10 @@ public class televisionPageFactory {
     }
 
     //Check that search field is displayed
-    public boolean isSearchFieldDisplayed () {
+    public boolean isSearchFieldDisplayed() {
         try {
             return searchField.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("Search field cannot be located \n" + e.getMessage());
             return false;
         }
@@ -66,104 +66,113 @@ public class televisionPageFactory {
     }
 
     //Check that logo is displayed
-    public boolean isLogoDisplayed () {
+    public boolean isLogoDisplayed() {
         try {
             return navLogo.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("Logo cannot be located \n" + e.getMessage());
             return false;
         }
     }
 
-    public String getSearchFieldTypeAttribute () {
+    public String getSearchFieldTypeAttribute() {
         return searchField.getAttribute("type");
     }
 
     //Check that the menu button is displayed
-    public boolean isAllMenuBtnDisplayed () {
+    public boolean isAllMenuBtnDisplayed() {
         try {
             return allMenuBtn.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The side menu button cannot be located \n" + e.getMessage());
             return false;
         }
     }
 
     //Check that the menu list is displayed after the menu button is clicked.
-    public boolean isMainMenuListDisplayed () {
+    public boolean isMainMenuListDisplayed() {
         try {
             return mainMenuList.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The side menu list is not displayed \n" + e.getMessage());
             return false;
         }
     }
 
     //Check that the television list is displayed
-    public boolean isTelevisionListDisplayed () {
-        try {
-            return televisionFilterMenuList.isDisplayed();
-        } catch(Exception e) {
-            System.out.print("The side menu list for televison is not displayed \n" + e.getMessage());
-            return false;
+    public void isTelevisionListDisplayed() {
+        for (WebElement i : televisionFilterMenuList) {
+            i.isDisplayed();
         }
     }
 
     //Check that the filter button is displayed
-    public boolean isFilterButtonDisplayed () {
+    public boolean isFilterButtonDisplayed() {
         try {
             return filterBtn.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The filter button is not displayed \n" + e.getMessage());
             return false;
         }
     }
 
     //Check that the name cards of items are displayed to help us confirm each name contains Samsung
-    public boolean isSamsungItemNameCardDisplayed () {
+    public boolean isSamsungItemNameCardDisplayed() {
         try {
             return itemNameCards.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The name cards of each item is not displayed \n" + e.getMessage());
             return false;
         }
     }
 
     //Check that the list of items are displayed to help us click on the second highest
-    public boolean isSamsungItemsDisplayed () {
+    public boolean isSamsungItemsDisplayed() {
         try {
             return items.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The list containing each item is not displayed \n" + e.getMessage());
             return false;
         }
     }
 
     //Check that about item title is displayed
-    public boolean isAboutItemTitleDisplayed () {
+    public boolean isAboutItemTitleDisplayed() {
         try {
             return aboutItemTitle.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The about item header is not displayed \n" + e.getMessage());
             return false;
         }
     }
 
     //Check that the list of bullet points under about item is displayed
-    public boolean isAboutItemDescriptionListDisplayed () {
+    public boolean isAboutItemDescriptionListDisplayed() {
         try {
             return aboutItemList.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.print("The list containing about item description is not displayed \n" + e.getMessage());
             return false;
         }
     }
 
+    //Below are methods to click on different elements
+    public televisionPageFactory clickOnAllMenuBtn() {
+        allMenuBtn.click();
+        return new televisionPageFactory(driver);
+    }
 
-
-
-
-
+    //Loop through the list and click on the element that contains the text
+//    public televisionPageFactory clickOnTvElectronicsAndAppliances() {
+//        for (WebElement i : televisionFilterMenuList) {
+//            System.out.println(i.getText());
+//            if (televisionFilterMenuList.get(Integer.parseInt(i.getText())).getText().toLowerCase().contains("TV, Appliances, Electronics".toLowerCase())) {
+//                televisionFilterMenuList.get(Integer.parseInt(i.getText())).click();
+//                break;
+//            }
+//            return new televisionPageFactory(driver);
+//        }
+//    }
 
 
 }

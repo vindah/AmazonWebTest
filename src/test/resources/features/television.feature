@@ -11,7 +11,7 @@ Feature: Amazon feature
     Given The merchant is on the home page
     Then The Logo should be displayed
     Then The search field should be present and editable
-    Then The side menu button should be present and clickable
+    Then The side menu button should be present
 
     # Amazon television(samsung) - Navigating to page and logging the about
   @acceptance @regression
@@ -19,7 +19,7 @@ Feature: Amazon feature
     Given The merchant is on the home page
     Then The Logo should be displayed
     Then The search field should be present and editable
-    Then The side menu button should be present and clickable
+    Then The side menu button should be present
     When The user clicks on the Side menu button
     And The user clicks on the Tv, Electronics and Appliances text
     And The user clicks on the Television text
