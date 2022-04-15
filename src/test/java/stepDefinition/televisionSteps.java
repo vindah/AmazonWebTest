@@ -2,12 +2,16 @@ package stepDefinition;
 
 import dataProvider.configFileReader;
 import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import io.cucumber.java.Scenario;
 import pageObjects.television.televisionPageFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -23,9 +27,11 @@ public class televisionSteps {
     @Before()
     public void setup() {
         driver = utilities.driverFactory.open("chrome");
-        driver.manage().timeouts().implicitlyWait(ConfigFileReader.getImplicitlyWait(), TimeUnit.SECONDS) ;
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
         ConfigFileReader = new configFileReader();
     }
+
+
 
     //Smoke test - verify that the home page loads properly
     @Given("The merchant is on the home page")
@@ -63,4 +69,18 @@ public class televisionSteps {
 //    }
 
 
+
+
+
+
+    @After()
+    public void takeScreenshots(Scenario scenario) {
+        if (scenario.isFailed()) {
+            // take screenshot:
+            String screenshotName = scenario.getName().replaceAll(" ", "_");
+            byte[] sourcePath = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath, "image/png", screenshotName);
+        }
+        driver.quit();
+    }
 }
