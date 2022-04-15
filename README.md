@@ -36,7 +36,8 @@ and
 6. To remove/tear down containers, run:
 `docker-compose down`
 
-**To run Test in headless:**
+
+### **To run Test in headless:**
 1. Navigate to the driver factory file:
 "src/main/java/utilities/driverFactory"
 Scroll and find **options.addArguments("--headless");** and then remove comment.
@@ -49,14 +50,15 @@ Ensure to comment out/disable **options.addArguments("start-maximized");**
 Navigate to root directory and run:
 `mvn test`
 
-**To run Test in header**
+
+### **To run Test in header**
 1. Navigate to the driver factory file:
 "src/main/java/utilities/driverFactory"
 2. Ensure that **options.addArguments("start-maximized");** is active
 3. Click on the JUnit build runner to run.
 
 
-**Run with Visual testing** 
+### **Run with Visual testing** 
 
 For this project, Applitools eyes was setup
 
