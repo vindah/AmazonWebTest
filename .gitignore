@@ -1,5 +1,7 @@
 # Project exclude paths
 .idea
-/test-output/
+/test-output/embedded1.png
+/test-output/embedded2.png
+
 /target/
 
