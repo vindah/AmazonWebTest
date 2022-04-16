@@ -178,12 +178,11 @@ public class televisionPageFactory {
             for (WebElement i : aboutItemList) {
                 if (i.isDisplayed()) {
                     listDescription = true;
-
+                    System.out.println("- "+i.getText());
                 }else{
                     listDescription = false; //return false if list is not displayed
                     break;
                 }
-                System.out.println("-"+i.getText());
             }
             return listDescription;
         } catch (Exception e) {

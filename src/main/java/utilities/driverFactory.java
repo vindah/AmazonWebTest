@@ -35,8 +35,8 @@ public class driverFactory {
                 System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedriverWin2.exe");
 
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("start-maximized");
-            //options.addArguments("--headless");
+            //options.addArguments("start-maximized");
+            options.addArguments("--headless");
             return new ChromeDriver(options);
         }
     }
