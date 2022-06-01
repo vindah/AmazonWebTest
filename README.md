@@ -1,5 +1,5 @@
 # AmazonWebTest
-This repo consists of cypress test code for some test cases created for this page : https://www.amazon.in/
+This repo consists of test cases created for this page : https://www.amazon.in/ using `Selenium, Junit and Cucumber`
 It scrolls through the menu options, selects a product, filters and clicks on the second highest, then logs its about to the console.
 
 ## Installation/Running the code
